@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\CategoriaController;
@@ -10,13 +11,31 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DeclaracaoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\NivelController;
+use App\Http\Controllers\EixoController;
 use App\Http\Controllers\TurmaController;
 
-Route::get('/home', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('home');
+Route::get('/', function () {
+    $user = Auth::user();
+
+    if ($user->role_id == env('ADMIN_ROLE_ID')) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if ($user->role_id == env('ALUNO_ROLE_ID')) {
+        return redirect()->route('aluno.dashboard');
+    }
+})->middleware('auth');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'ValidAdmin'])->group(function () {
+    Route::get('/admin', function() {
+        return view('dashboard');
+    })->name('admin.dashboard');
 
     Route::get('/alunos', [AlunoController::class, 'index'])->name('alunos.index');
     Route::get('/alunos/create', [AlunoController::class, 'create'])->name('alunos.create');
@@ -25,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/alunos/store', [AlunoController::class, 'store'])->name('alunos.store');
     Route::post('/alunos/update', [AlunoController::class, 'update'])->name('alunos.update');
     Route::post('/alunos/destroy/{id}', [AlunoController::class, 'destroy'])->name('alunos.destroy');
-
+    
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
     Route::get('/categorias/show/{id}', [CategoriaController::class, 'show'])->name('categorias.show');
@@ -65,7 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/documentos/store', [DocumentoController::class, 'store'])->name('documentos.store');
     Route::post('/documentos/update', [DocumentoController::class, 'update'])->name('documentos.update');
     Route::post('/documentos/destroy/{id}', [DocumentoController::class, 'destroy'])->name('documentos.destroy');
-
+    
     Route::get('/niveis', [NivelController::class, 'index'])->name('niveis.index');
     Route::get('/niveis/create', [NivelController::class, 'create'])->name('niveis.create');
     Route::get('/niveis/show/{id}', [NivelController::class, 'show'])->name('niveis.show');
@@ -74,6 +93,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/niveis/update', [NivelController::class, 'update'])->name('niveis.update');
     Route::post('/niveis/destroy/{id}', [NivelController::class, 'destroy'])->name('niveis.destroy');
 
+    Route::get('/eixos', [EixoController::class, 'index'])->name('eixos.index');
+    Route::get('/eixos/create', [EixoController::class, 'create'])->name('eixos.create');
+    Route::get('/eixos/show/{id}', [EixoController::class, 'show'])->name('eixos.show');
+    Route::get('/eixos/edit/{id}', [EixoController::class, 'edit'])->name('eixos.edit');
+    Route::post('/eixos/store', [EixoController::class, 'store'])->name('eixos.store');
+    Route::post('/eixos/update', [EixoController::class, 'update'])->name('eixos.update');
+    Route::post('/eixos/destroy/{id}', [EixoController::class, 'destroy'])->name('eixos.destroy');
+
     Route::get('/turmas/{curso_id}', [TurmaController::class, 'index'])->name('turmas.index');
     Route::get('/turmas/{curso_id}/create', [TurmaController::class, 'create'])->name('turmas.create');
     Route::get('/turmas/{curso_id}/show/{id}', [TurmaController::class, 'show'])->name('turmas.show');
@@ -81,11 +108,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/turmas/{curso_id}/store', [TurmaController::class, 'store'])->name('turmas.store');
     Route::post('/turmas/{curso_id}/update', [TurmaController::class, 'update'])->name('turmas.update');
     Route::post('/turmas/{curso_id}/destroy/{id}', [TurmaController::class, 'destroy'])->name('turmas.destroy');
+});
 
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth', 'ValidAluno'])->group(function () {
+    Route::get('/aluno', function() {
+        return view('dashboard');
+    })->name('aluno.dashboard');
 });
 
 require __DIR__.'/auth.php';

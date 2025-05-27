@@ -20,15 +20,26 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * @param \App\Http\Requests\Auth\LoginRequest $request
      */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
+        /** @var \Illuminate\Http\Request $request */
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home', absolute: false));
+        $user = Auth::user();
+    
+        if ($user->role_id == env('ADMIN_ROLE_ID', 'role_id')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->role_id == env('ALUNO_ROLE_ID', 'role_id')) {
+            return redirect()->route('aluno.dashboard');
+        }
+
+        return redirect()->intended(route('login', absolute: false));
     }
 
     /**

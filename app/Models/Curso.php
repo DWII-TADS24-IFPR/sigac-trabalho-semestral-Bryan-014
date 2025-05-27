@@ -24,6 +24,10 @@ class Curso extends Model
         return $this->hasMany(Nivel::class);
     }
 
+    public function eixo() {
+        return $this->hasMany(Eixo::class);
+    }
+
     public function turmas() {
         return $this->hasMany(Turma::class);
     }
