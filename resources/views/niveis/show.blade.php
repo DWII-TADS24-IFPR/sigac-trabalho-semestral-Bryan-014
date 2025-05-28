@@ -19,11 +19,11 @@
             <p><b>Nome: </b>{{$nivel->nome}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <form action="{{ Route('niveis.destroy', ['id' => $nivel->id]) }}" method="post">
+            <form action="{{ route('niveis.destroy', ['id' => $nivel->id]) }}" method="post">
                 @csrf
                 <input class="primary-btn" type="submit" value="Excluir">
             </form>
-            <a class="primary-btn" href="{{ Route('niveis.edit', ['id' => $nivel->id]) }}">Editar</a>
+            <a class="primary-btn" href="{{ route('niveis.edit', ['id' => $nivel->id]) }}">Editar</a>
         </div>
     </div>
 @endsection

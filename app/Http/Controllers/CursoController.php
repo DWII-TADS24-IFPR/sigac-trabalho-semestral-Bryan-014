@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
+use App\Models\Eixo;
 use App\Models\Nivel;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,9 @@ class CursoController extends Controller
 
     protected $validationMessages = [
         'nome.required' => 'O campo nome é obigatório',
-        'nome.min:3' => 'O campo nome deve ter no mínimo 3 caracteres',
+        'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
         'sigla.required' => 'O campo sigla é obigatório',
-        'sigla.max:8' => 'O campo sigla deve ter no máximo 8 caracteres',
+        'sigla.max' => 'O campo sigla deve ter no máximo 8 caracteres',
         'total_horas.required' => 'O campo total_horas deve conter pelo menos 3 caracteres',
         'total_horas.numeric' => 'O campo total_horas deve conter pelo menos 3 caracteres',
     ];
@@ -32,23 +33,38 @@ class CursoController extends Controller
     public function create()
     {
         $niveis = Nivel::all();
-        return view('cursos.create')->with('niveis', $niveis);
+        $eixos = Eixo::all();
+        return view('cursos.create')->with('niveis', $niveis)->with('eixos', $eixos);
     }
     
     public function store(Request $request)
     {
         $request->validate($this->validationRules, $this->validationMessages);
 
-        $result = Curso::create($request->all());
+        $nome = $request->nome;
+        $sigla = $request->sigla;
+        $total_horas = $request->total_horas;
+        $eixo_id = $request->eixo;
+        $nivel_id = $request->nivel;
+
+        $curso = new Curso();
+        $curso->nome = $nome;
+        $curso->sigla = $sigla;
+        $curso->total_horas = $total_horas;
+        $curso->eixo_id = $eixo_id;
+        $curso->nivel_id = $nivel_id;
+
+        $result = $curso->save();
         
-        return redirect()->route('turmas.index', ['curso_id' => $result->id])->with('success', 'Curso cadastrado com sucesso!');
+        return redirect()->route('turmas.index', ['curso_id' => $curso->id])->with('success', 'Curso cadastrado com sucesso!');
     }
     
     public function show(string $id)
     {
         $curso = Curso::find($id);
-        if (isset($curso)) {
-            return view('cursos.show')->with('curso', $curso);    
+        if (isset($curso)) {            
+            $turmas = $curso->turmas;
+            return view('cursos.show', ['curso_id' => $id])->with('curso', $curso)->with('turmas', $turmas);    
         }
         return view('cursos.index')->with('danger', 'Curso não encontrado');
     }

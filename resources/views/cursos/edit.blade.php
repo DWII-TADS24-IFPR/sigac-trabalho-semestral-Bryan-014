@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Cursos" subPage="Editar" link="cursos.index"/>
-    <form action="{{ Route('cursos.update') }}" method="post">
+    <form action="{{ route('cursos.update') }}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$curso->id}}">
         <div class="mt-2 mb-3">
@@ -33,7 +33,7 @@
                     <div class="point"></div>
                 </div>
                 <div class="step step-free">
-                    <a href="{{Route('turmas.index', ['curso_id' => $curso->id])}}">
+                    <a href="{{route('turmas.index', ['curso_id' => $curso->id])}}">
                         <div class="num-step">
                             2
                         </div>

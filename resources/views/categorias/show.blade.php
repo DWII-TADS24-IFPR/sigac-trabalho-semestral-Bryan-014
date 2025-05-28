@@ -20,11 +20,11 @@
             <p><b>Maximo de Horas: </b>{{$categoria->maximo_horas}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <form action="{{ Route('categorias.destroy', ['id' => $categoria->id]) }}" method="post">
+            <form action="{{ route('categorias.destroy', ['id' => $categoria->id]) }}" method="post">
                 @csrf
                 <input class="primary-btn" type="submit" value="Excluir">
             </form>
-            <a class="primary-btn" href="{{ Route('categorias.edit', ['id' => $categoria->id]) }}">Editar</a>
+            <a class="primary-btn" href="{{ route('categorias.edit', ['id' => $categoria->id]) }}">Editar</a>
         </div>
     </div>
 @endsection

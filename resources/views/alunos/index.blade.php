@@ -15,7 +15,7 @@
 @section('cont-box')
     <x-bread-crumb page="Alunos"/>
     <div class="head-table">
-        <a href="{{ Route('alunos.create') }}" class="primary-btn mt-2">Cadastrar Aluno</a>  
+        <a href="{{ route('alunos.create') }}" class="primary-btn mt-2">Cadastrar Aluno</a>  
     </div>
     <div class="table-content mt-2">
         <div class="tbl-row">
@@ -29,8 +29,8 @@
                     <div class="tbl-cont">{{$alunos[$i]->nome}}</div>
                     <div class="tbl-cont">{{$alunos[$i]->email}}</div>
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ Route('alunos.show', ['id' => $alunos[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ Route('alunos.edit', ['id' => $alunos[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
+                        <a href="{{ route('alunos.show', ['id' => $alunos[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        <a href="{{ route('alunos.edit', ['id' => $alunos[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
                         <form action="{{ Route('alunos.destroy', ['id' => $alunos[$i]->id]) }}" method="post">
                             @csrf
                             <input class="tbl-btn-crud crud-delt" type="submit" value="">

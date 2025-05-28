@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Declarações" subPage="Cadastrar" link="declaracoes.index"/>
-    <form action="{{ Route('declaracoes.store') }}" method="post">
+    <form action="{{ route('declaracoes.store') }}" method="post">
         @csrf
         <div class="mt-2 mb-3">
             <div class="wrapper-inputs">

@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Alunos" subPage="Editar" link="alunos.index"/>
-    <form action="{{ Route('alunos.update') }}" method="post">
+    <form action="{{ route('alunos.update') }}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$aluno->id}}">
         <div class="mt-2 mb-3">

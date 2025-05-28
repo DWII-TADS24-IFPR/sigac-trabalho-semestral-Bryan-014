@@ -13,28 +13,45 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Documentos" />
-    <div class="head-table">
-        <a href="{{ Route('documentos.create') }}" class="primary-btn mt-2">Cadastrar Documento</a>  
-    </div>
+    <x-bread-crumb page="Solicitções" />
+    {{-- <div class="head-table">
+        <a href="{{ route('documentos.create') }}" class="primary-btn mt-2">Cadastrar Documento</a>  
+    </div> --}}
     <div class="table-content mt-2">
         <div class="tbl-row">
             <div class="tbl-head">Descrição</div>
-            <div class="tbl-head">Status</div>
+            @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
+                <div class="tbl-head">Aluno</div>
+            @else
+                <div class="tbl-head">Status</div>
+            @endif
             <div class="tbl-head"></div>
         </div>
         @if (count($documentos) > 0) 
             @for ($i = 0; $i < count($documentos); $i++)
                 <div class="tbl-row {{$i % 2 == 0 ? '' : 'row-stripe'}}">
                     <div class="tbl-cont">{{$documentos[$i]->descricao}}</div>
-                    <div class="tbl-cont">{{$documentos[$i]->status}}</div>
+                    @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
+                    <div class="tbl-cont center">{{$documentos[$i]->user->name}}</div>
+                    @else
+                    <div class="tbl-cont center">
+                        @if ($documentos[$i]->status == 0)
+                                <div class="status-ball danger"></div>
+                                @else
+                                <div class="status-ball sucess"></div>
+                            @endif
+                        </div>
+                    @endif
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ Route('documentos.show', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ Route('documentos.edit', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
-                        <form action="{{ Route('documentos.destroy', ['id' => $documentos[$i]->id]) }}" method="post">
-                            @csrf
-                            <input class="tbl-btn-crud crud-delt" type="submit" value="">
-                        </form>
+                        <a href="{{ route('documentos.show', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
+                            <a href="{{ route('documentos.show', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-aprv"></a>                            
+                            <a href="{{ route('documentos.show', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-no"></a>                            
+                        @else                        
+                            @if ($documentos[$i]->status == 1)
+                                <a href="{{ route('documentos.show', ['id' => $documentos[$i]->id]) }}" class="tbl-btn-crud crud-pdf"></a>                            
+                            @endif
+                        @endif
                     </div>
                 </div>
             @endfor

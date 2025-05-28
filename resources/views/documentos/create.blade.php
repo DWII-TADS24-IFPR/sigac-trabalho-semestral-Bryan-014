@@ -13,8 +13,8 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Documentos" subPage="Cadastrar" link="documentos.index"/>
-    <form action="{{ Route('documentos.store') }}" method="post">
+    <x-bread-crumb page="Solicitar Horas"/>
+    <form action="{{ route('documentos.store') }}" method="post">
         @csrf
         <div class="mt-2 mb-3">
             <div class="wrapper-inputs">
@@ -41,18 +41,8 @@
                     </p>
                 </div>
             </div>
+            <input type="hidden" name="status" vaue="0">
             <div class="wrapper-inputs">
-                <div class="primary-input">
-                    <div>
-                        <input type="text" placeholder=" " name="status" id="status" value="{{old('status')}}">
-                        <label for="status">Ststus</label>
-                    </div>
-                    <p id="response-status">
-                        @error('status')                        
-                            {{$message}}
-                        @enderror
-                    </p>
-                </div>
                 <div class="primary-input">
                     <div>
                         <input type="text" placeholder=" " name="comentario" id="comentario" value="{{old('comentario')}}">
@@ -61,6 +51,21 @@
                     <p id="response-comentario">
                         @error('comentario')                        
                             {{$message}}
+                        @enderror
+                    </p>
+                </div>
+                <div class="primary-input">
+                    <div>
+                        <select name="categoria" id="categoria">
+                            <option value="">Categorias</option>
+                            @foreach ($categorias as $categoria)
+                                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <p id="response-categoria">
+                        @error('categoria')                        
+                        {{$message}}
                         @enderror
                     </p>
                 </div>
@@ -90,7 +95,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <input class="primary-btn" type="submit" value="Cadastrar">
+                <input class="primary-btn" type="submit" value="Solicitar">
             </div>
         </div>
     </form>

@@ -20,11 +20,11 @@
             <p><b>Horas: </b>{{$comprovante->horas}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <form action="{{ Route('comprovantes.destroy', ['id' => $comprovante->id]) }}" method="post">
+            <form action="{{ route('comprovantes.destroy', ['id' => $comprovante->id]) }}" method="post">
                 @csrf
                 <input class="primary-btn" type="submit" value="Excluir">
             </form>
-            <a class="primary-btn" href="{{ Route('comprovantes.edit', ['id' => $comprovante->id]) }}">Editar</a>
+            <a class="primary-btn" href="{{ route('comprovantes.edit', ['id' => $comprovante->id]) }}">Editar</a>
         </div>
     </div>
 @endsection

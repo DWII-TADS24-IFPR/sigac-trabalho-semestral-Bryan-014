@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Comprovante" subPage="Cadastrar" link="comprovantes.index"/>
-    <form action="{{ Route('comprovantes.store') }}" method="post">
+    <form action="{{ route('comprovantes.store') }}" method="post">
         @csrf
         <div class="mt-2 mb-3">
             <div class="wrapper-inputs">

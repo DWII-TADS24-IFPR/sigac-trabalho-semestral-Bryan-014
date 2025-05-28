@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Aluno;
 use App\Models\Curso;
 use Illuminate\Http\Request;
@@ -11,7 +12,9 @@ class AlunoController extends Controller
     protected $validationRules = [
         'nome' => 'required|min:3',
         'email' => 'required|email',
-        'cpf' => 'required'
+        'cpf' => 'required',
+        'curso' => 'required',
+        'turma' => 'required'
     ];
 
     protected $validationMessages = [
@@ -19,7 +22,9 @@ class AlunoController extends Controller
         'nome.min' => 'O campo nome deve conter ao menos 3 caracteres',
         'email.required' => 'O campo email é obigatório',
         'email.email' => 'O campo email deve conter um email válido',
-        'cpf.required' => 'O campo cpf é obrigatório'
+        'cpf.required' => 'O campo cpf é obrigatório',
+        'curso.required' => 'O campo curso é obigatório',
+        'turma.required' => 'O campo turma é obrigatório',
     ];
 
     public function index()

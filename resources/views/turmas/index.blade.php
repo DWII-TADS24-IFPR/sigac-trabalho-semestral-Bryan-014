@@ -17,7 +17,7 @@
     <div class="mt-2 mb-3">
         <div class="steps">
             <div class="step step-free">
-                <a href="{{ Route('cursos.edit', $curso_id) }}">
+                <a href="{{ route('cursos.edit', $curso_id) }}">
                     <div class="num-step">
                         1
                     </div>
@@ -51,7 +51,7 @@
                             <h5 class="modal-title" id="createTurmaLabel">Cadastrar Turma</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ Route('turmas.store', ['curso_id' => $curso_id]) }}" method="post">
+                        <form action="{{ route('turmas.store', ['curso_id' => $curso_id]) }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <div class="modal-body">
@@ -88,7 +88,7 @@
                         <div class="tbl-cont">{{$turmas[$i]->ano}}</div>
                         <div class="tbl-cont center cont-crud">
                             <a class="tbl-btn-crud crud-updt" data-bs-toggle="modal" data-bs-target="#editTurma{{$turmas[$i]->id}}"></a>
-                            {{-- href="{{ Route('turmas.edit', ['id' => $turmas[$i]->id, 'curso_id' => $curso_id]) }}" --}}
+                            {{-- href="{{ route('turmas.edit', ['id' => $turmas[$i]->id, 'curso_id' => $curso_id]) }}" --}}
                             <div class="modal fade" id="editTurma{{$turmas[$i]->id}}" tabindex="-1" aria-labelledby="editTurma{{$turmas[$i]}}Label" aria-hidden="true">  
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -96,7 +96,7 @@
                                             <h5 class="modal-title" id="editTurma{{$turmas[$i]->id}}Label">Editar Turma</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form action="{{ Route('turmas.update', ['curso_id' => $curso_id]) }}" method="post">
+                                        <form action="{{ route('turmas.update', ['curso_id' => $curso_id]) }}" method="post">
                                             @csrf
                                             <input type="hidden" name="curso_id" value="{{$curso_id}}">
                                             <input type="hidden" name="id" value="{{$turmas[$i]->id}}">
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="{{ Route('turmas.destroy', ['id' => $turmas[$i]->id, 'curso_id' => $curso_id]) }}" method="post">
+                            <form action="{{ route('turmas.destroy', ['id' => $turmas[$i]->id, 'curso_id' => $curso_id]) }}" method="post">
                                 @csrf
                                 <input class="tbl-btn-crud crud-delt" type="submit" value="">
                             </form>

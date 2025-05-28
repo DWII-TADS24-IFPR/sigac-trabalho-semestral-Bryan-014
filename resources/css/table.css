@@ -81,6 +81,18 @@
         & .tbl-btn-crud.crud-delt {
             background-image: url('../img/lists/trash-wt.svg');
         }
+
+        & .tbl-btn-crud.crud-pdf {
+            background-image: url('../img/lists/pdf.svg');
+        }
+
+        & .tbl-btn-crud.crud-aprv {
+            background-image: url('../img/lists/aprv.svg');
+        }
+
+        & .tbl-btn-crud.crud-no {
+            background-image: url('../img/lists/no.svg');
+        }
     }
 
     & .tbl-row.row-stripe {
@@ -109,6 +121,24 @@
     padding: 8px 6px;
     display: flex;
     justify-content: space-between;
+}
+
+.status-ball {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}
+
+.status-ball.pend {
+    background-color: var(--danger-color);
+}
+
+.status-ball.danger {
+    background-color: var(--danger-color);
+}
+
+.status-ball.success {
+    background-color: var(--success-color);
 }
 
 .pagination-btns {

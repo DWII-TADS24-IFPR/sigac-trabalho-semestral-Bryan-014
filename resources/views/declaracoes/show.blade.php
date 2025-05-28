@@ -20,11 +20,11 @@
             <p><b>Hash: </b>{{$declaracao->hash}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <form action="{{ Route('declaracoes.destroy', ['id' => $declaracao->id]) }}" method="post">
+            <form action="{{ route('declaracoes.destroy', ['id' => $declaracao->id]) }}" method="post">
                 @csrf
                 <input class="primary-btn" type="submit" value="Excluir">
             </form>
-            <a class="primary-btn" href="{{ Route('declaracoes.edit', ['id' => $declaracao->id]) }}">Editar</a>
+            <a class="primary-btn" href="{{ route('declaracoes.edit', ['id' => $declaracao->id]) }}">Editar</a>
         </div>
     </div>
 @endsection

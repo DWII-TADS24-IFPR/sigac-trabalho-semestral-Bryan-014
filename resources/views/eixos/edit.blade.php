@@ -13,13 +13,14 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Níveis" subPage="Cadastrar" link="niveis.index"/>
-    <form action="{{ route('niveis.store') }}" method="post">
+    <x-bread-crumb page="Eixos" subPage="Editar" link="eixos.index"/>
+    <form action="{{ route('eixos.update') }}" method="post">
         @csrf
+        <input type="hidden" name="id" value="{{$eixo->id}}">
         <div class="mb-3">
             <div class="primary-input">
                 <div>
-                    <input type="text" placeholder=" " name="nome" id="nome" value="{{old('nome')}}">
+                    <input type="text" placeholder=" " name="nome" id="nome" value="{{$eixo->nome}}">
                     <label for="nome">Nome</label>
                 </div>
                 <p id="response-nome">
@@ -28,7 +29,9 @@
                     @enderror
                 </p>
             </div>
-            <input class="primary-btn" type="submit" value="Cadastrar">
+            <div class="d-flex justify-content-end">
+                <input class="primary-btn" type="submit" value="Editar">
+            </div>
         </div>
     </form>
 @endsection

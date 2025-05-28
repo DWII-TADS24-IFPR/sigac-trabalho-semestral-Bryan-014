@@ -22,6 +22,18 @@
                     <div class="cont-box">
                         @yield('cont-box')
                     </div>
+                    @if (session('danger')) 
+                        <x-alert :text="session('danger')"/>
+                    @elseif (session('success')) 
+                        <x-alert :text="session('success')"/>
+                    @endif
+                    @if ($errors->any())
+                        @foreach($errors->all() as $erro)
+                            <script>
+                                console.log('{{$erro}}');
+                            </script>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

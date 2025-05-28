@@ -13,7 +13,7 @@ class NivelController extends Controller
 
     protected $validationMessages = [
         'nome.required' => 'O campo nome é obigatório',
-        'nome.max:10' => 'O campo nome deve ter no máximo 10 caracteres',
+        'nome.max' => 'O campo nome deve ter no máximo 10 caracteres',
     ];
 
     public function index()
@@ -42,7 +42,7 @@ class NivelController extends Controller
         if (isset($nivel)) {
             return view('niveis.show')->with('nivel', $nivel);    
         }
-        return view('niveis.index')->with('danger', 'Nível não encontrado');
+        return redirect()->route('niveis.index')->with('danger', 'Nível não encontrado');
     }
     
     public function edit(string $id)
@@ -51,7 +51,7 @@ class NivelController extends Controller
         if (isset($nivel)) {
             return view('niveis.edit')->with('nivel', $nivel);                    
         }
-        return view('niveis.index')->with('danger', 'Nível não encontrado');
+        return redirect()->route('niveis.index')->with('danger', 'Nível não encontrado');
     }
     
     public function update(Request $request)
@@ -67,7 +67,7 @@ class NivelController extends Controller
 
             return redirect()->route('niveis.index')->with('success', 'Nível atualizado com sucesso!');
         }
-        return view('niveis.index')->with('danger', 'Nível não encontrado');
+        return redirect()->route('niveis.index')->with('danger', 'Nível não encontrado');
     }
     
     public function destroy(string $id)
@@ -79,6 +79,6 @@ class NivelController extends Controller
             return redirect()->route('niveis.index')->with('success', 'Nível deletado com sucesso!');
         }
         
-        return view('niveis.index')->with('danger', 'Nível não encontrado');
+        return redirect()->route('niveis.index')->with('danger', 'Nível não encontrado');
     }
 }

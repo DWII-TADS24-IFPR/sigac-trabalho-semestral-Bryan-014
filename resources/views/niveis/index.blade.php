@@ -15,7 +15,7 @@
 @section('cont-box')
     <x-bread-crumb page="Níveis"/>
     <div class="head-table">
-        <a href="{{ Route('niveis.create') }}" class="primary-btn mt-2">Cadastrar Nível</a>  
+        <a href="{{ route('niveis.create') }}" class="primary-btn mt-2">Cadastrar Nível</a>  
     </div>
     <div class="table-content mt-2">
         <div class="tbl-row">
@@ -27,9 +27,9 @@
                 <div class="tbl-row {{$i % 2 == 0 ? '' : 'row-stripe'}}">
                     <div class="tbl-cont">{{$niveis[$i]->nome}}</div>
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ Route('niveis.show', ['id' => $niveis[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ Route('niveis.edit', ['id' => $niveis[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
-                        <form action="{{ Route('niveis.destroy', ['id' => $niveis[$i]->id]) }}" method="post">
+                        <a href="{{ route('niveis.show', ['id' => $niveis[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        <a href="{{ route('niveis.edit', ['id' => $niveis[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
+                        <form action="{{ route('niveis.destroy', ['id' => $niveis[$i]->id]) }}" method="post">
                             @csrf
                             <input class="tbl-btn-crud crud-delt" type="submit" value="">
                         </form>

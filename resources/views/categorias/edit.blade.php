@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Categorias" subPage="Editar" link="categorias.index"/>
-    <form action="{{ Route('categorias.update') }}" method="post">
+    <form action="{{ route('categorias.update') }}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$categoria->id}}">
         <div class="mt-2 mb-3">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
-                <form action="{{ Route('categorias.destroy', ['id' => $categoria->id]) }}" method="post">
+                <form action="{{ route('categorias.destroy', ['id' => $categoria->id]) }}" method="post">
                     @csrf
                     <input class="primary-btn" type="submit" value="Excluir">
                 </form>

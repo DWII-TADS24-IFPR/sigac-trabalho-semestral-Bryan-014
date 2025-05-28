@@ -13,25 +13,23 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Categorias"/>
+    <x-bread-crumb page="Eixos"/>
     <div class="head-table">
-        <a href="{{ route('categorias.create') }}" class="primary-btn mt-2">Cadastrar Categoria</a>  
+        <a href="{{ route('eixos.create') }}" class="primary-btn mt-2">Cadastrar Eixo</a>  
     </div>
     <div class="table-content mt-2">
         <div class="tbl-row">
             <div class="tbl-head">Nome</div>
-            <div class="tbl-head">Máximo de Horas</div>
             <div class="tbl-head"></div>
         </div>
-        @if (count($categorias) > 0) 
-            @for ($i = 0; $i < count($categorias); $i++)
+        @if (count($eixos) > 0) 
+            @for ($i = 0; $i < count($eixos); $i++)
                 <div class="tbl-row {{$i % 2 == 0 ? '' : 'row-stripe'}}">
-                    <div class="tbl-cont">{{$categorias[$i]->nome}}</div>
-                    <div class="tbl-cont center">{{$categorias[$i]->maximo_horas}}</div>
+                    <div class="tbl-cont">{{$eixos[$i]->nome}}</div>
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ route('categorias.show', ['id' => $categorias[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ route('categorias.edit', ['id' => $categorias[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
-                        <form action="{{ route('categorias.destroy', ['id' => $categorias[$i]->id]) }}" method="post">
+                        <a href="{{ route('eixos.show', ['id' => $eixos[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        <a href="{{ route('eixos.edit', ['id' => $eixos[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
+                        <form action="{{ route('eixos.destroy', ['id' => $eixos[$i]->id]) }}" method="post">
                             @csrf
                             <input class="tbl-btn-crud crud-delt" type="submit" value="">
                         </form>

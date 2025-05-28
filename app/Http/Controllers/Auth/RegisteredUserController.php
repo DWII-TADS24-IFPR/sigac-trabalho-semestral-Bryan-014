@@ -12,14 +12,47 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Aluno;
+use App\Models\Curso;
+
 class RegisteredUserController extends Controller
 {
+    protected $validationRules = [
+        'name' => 'required|min:3|max:255',
+        'email' => 'required|email',
+        'cpf' => 'required',
+        'curso' => 'required',
+        'turma' => 'required'
+    ];
+
+    protected $validationMessages = [
+        'name.required' => 'O campo nome é obigatório',
+        'name.min' => 'O campo nome deve conter ao menos 3 caracteres',
+        'email.required' => 'O campo email é obigatório',
+        'email.email' => 'O campo email deve conter um email válido',
+        'cpf.required' => 'O campo cpf é obrigatório',
+        'curso.required' => 'O campo curso é obigatório',
+        'turma.required' => 'O campo turma é obrigatório',
+    ];
+
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        $cursos = Curso::all();
+        $turmasPorCurso = $cursos->map(function($curso) {
+            return [
+                'curso' => $curso->id,
+                'turmas' => $curso->turmas->map(function($turma) {
+                    return [
+                        'id' => $turma->id,
+                        'ano' => $turma->ano
+                    ];
+                })
+            ];
+        });
+        return view('auth.register')->with('cursos', $cursos)->with('turmasPorCurso', $turmasPorCurso);
     }
 
     /**
@@ -42,10 +75,19 @@ class RegisteredUserController extends Controller
             'role_id' => 2
         ]);
 
+        Aluno::create([
+            'nome' => $request->name,
+            'email' => $request->email,
+            'cpf' => $request->cpf,
+            'curso_id' => $request->curso,
+            'turma_id' => $request->turma,
+            'user_id' => $user->id,
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('home', absolute: false));
+        return redirect(route('aluno.dashboard', absolute: false));        
     }
 }

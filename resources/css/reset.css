@@ -15,6 +15,8 @@
     --aside-background: #fff;
     --content-text-color: #000;
     --blue-link: #2424f3;
+    --pendingsuccess-color: hsl(57, 80%, 49%);
+    --success-color: hsl(118, 70%, 42%);
     --danger-color: hsl(0, 84%, 51%);
     --danger-dark-color: hsl(0, 70%, 27%);
     --modal-bg: #000000a8;
@@ -37,6 +39,8 @@
     --aside-background: hsl(var(--tom), 10%, 28%);
     --content-text-color: #fff;
     --blue-link: #4d4dff;
+    --pendingsuccess-color: hsl(67, 82%, 51%);
+    --success-color: hsl(125, 73%, 37%);
     --danger-color: hsl(0, 84%, 51%);
     --danger-dark-color: hsl(0, 70%, 27%);
     --modal-bg: #000000a8;

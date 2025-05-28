@@ -27,6 +27,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/documentos/show/{id}', [DocumentoController::class, 'show'])->name('documentos.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -75,15 +76,7 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
     Route::get('/declaracoes/edit/{id}', [DeclaracaoController::class, 'edit'])->name('declaracoes.edit');
     Route::post('/declaracoes/store', [DeclaracaoController::class, 'store'])->name('declaracoes.store');
     Route::post('/declaracoes/update', [DeclaracaoController::class, 'update'])->name('declaracoes.update');
-    Route::post('/declaracoes/destroy/{id}', [DeclaracaoController::class, 'destroy'])->name('declaracoes.destroy');
-
-    Route::get('/documentos', [DocumentoController::class, 'index'])->name('documentos.index');
-    Route::get('/documentos/create', [DocumentoController::class, 'create'])->name('documentos.create');
-    Route::get('/documentos/show/{id}', [DocumentoController::class, 'show'])->name('documentos.show');
-    Route::get('/documentos/edit/{id}', [DocumentoController::class, 'edit'])->name('documentos.edit');
-    Route::post('/documentos/store', [DocumentoController::class, 'store'])->name('documentos.store');
-    Route::post('/documentos/update', [DocumentoController::class, 'update'])->name('documentos.update');
-    Route::post('/documentos/destroy/{id}', [DocumentoController::class, 'destroy'])->name('documentos.destroy');
+    Route::post('/declaracoes/destroy/{id}', [DeclaracaoController::class, 'destroy'])->name('declaracoes.destroy');    
     
     Route::get('/niveis', [NivelController::class, 'index'])->name('niveis.index');
     Route::get('/niveis/create', [NivelController::class, 'create'])->name('niveis.create');
@@ -92,7 +85,7 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
     Route::post('/niveis/store', [NivelController::class, 'store'])->name('niveis.store');
     Route::post('/niveis/update', [NivelController::class, 'update'])->name('niveis.update');
     Route::post('/niveis/destroy/{id}', [NivelController::class, 'destroy'])->name('niveis.destroy');
-
+    
     Route::get('/eixos', [EixoController::class, 'index'])->name('eixos.index');
     Route::get('/eixos/create', [EixoController::class, 'create'])->name('eixos.create');
     Route::get('/eixos/show/{id}', [EixoController::class, 'show'])->name('eixos.show');
@@ -108,12 +101,29 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
     Route::post('/turmas/{curso_id}/store', [TurmaController::class, 'store'])->name('turmas.store');
     Route::post('/turmas/{curso_id}/update', [TurmaController::class, 'update'])->name('turmas.update');
     Route::post('/turmas/{curso_id}/destroy/{id}', [TurmaController::class, 'destroy'])->name('turmas.destroy');
+
+    Route::get('/solicitacoes', [DocumentoController::class, 'index'])->name('solicitacoes.index');
+    Route::post('/documentos/{id}/aprove', [DocumentoController::class, 'aprove'])->name('documentos.aprove');
+    Route::post('/documentos/{id}/demiss', [DocumentoController::class, 'demiss'])->name('documentos.demiss');
+    Route::get('/horas', [DocumentoController::class, 'index'])->name('horas.index');
+    
 });
 
 Route::middleware(['auth', 'ValidAluno'])->group(function () {
     Route::get('/aluno', function() {
         return view('dashboard');
     })->name('aluno.dashboard');
+
+    Route::get('/solicitacao', [DocumentoController::class, 'create'])->name('solicitacao.create');
+
+    Route::get('/documentos', [DocumentoController::class, 'list'])->name('documentos.list');
+    Route::post('/documentos/store', [DocumentoController::class, 'store'])->name('documentos.store');
+
+    Route::get('/declaracao', [DocumentoController::class, 'generate'])->name('declaracao.generate');
+
+    // Route::get('/documentos/edit/{id}', [DocumentoController::class, 'edit'])->name('documentos.edit');
+    // Route::post('/documentos/update', [DocumentoController::class, 'update'])->name('documentos.update');
+    // Route::post('/documentos/destroy/{id}', [DocumentoController::class, 'destroy'])->name('documentos.destroy');
 });
 
 require __DIR__.'/auth.php';

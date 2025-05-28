@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Cursos" subPage="Cadastrar" link="cursos.index"/>
-    <form action="{{ Route('cursos.store') }}" method="post">
+    <form action="{{ route('cursos.store') }}" method="post">
         @csrf
         <div class="mt-2 mb-3">
             <div class="steps">
@@ -63,6 +63,21 @@
                         @enderror
                     </p>
                 </div>
+            </div>
+            <div class="primary-input">
+                <div>
+                    <select name="eixo" id="eixo">
+                        <option value="">Eixo</option>
+                        @foreach ($eixos as $eixo)
+                            <option value="{{$eixo->id}}">{{$eixo->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <p id="response-eixo">
+                    @error('eixo')                        
+                    {{$message}}
+                    @enderror
+                </p>
             </div>
             <div class="wrapper-inputs">
                 <div class="primary-input">

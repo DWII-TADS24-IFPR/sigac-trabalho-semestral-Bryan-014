@@ -15,7 +15,7 @@ class DeclaracaoController extends Controller
     protected $validationMessages = [
         'data.required' => 'O campo data é obigatório',
         'hash.required' => 'O campo hash é obigatório',
-        'hash.max:25' => 'O campo data deve conter uma data válida',
+        'hash.max' => 'O campo data deve conter uma data válida',
     ];
 
     public function index()

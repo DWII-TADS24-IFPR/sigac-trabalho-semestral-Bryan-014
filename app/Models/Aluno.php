@@ -18,9 +18,14 @@ class Aluno extends Model
         'cpf',
         'email',
         'senha',
+        'user_id',
         'curso_id',
         'turma_id',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     public function cursos() {
         return $this->hasMany(Curso::class);

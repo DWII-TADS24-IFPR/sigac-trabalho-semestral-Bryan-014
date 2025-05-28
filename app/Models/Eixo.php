@@ -12,7 +12,7 @@ class Eixo extends Model
         'nome',
     ];
 
-    public function curso() {
-        return $this->belongsTo(Curso::class);
+    public function cursos() {
+        return $this->hasMany(Curso::class);
     }
 }

@@ -18,9 +18,14 @@ class Documento extends Model
         'comentario',
         'horas_out',
         'categoria_id',
+        'users_id',
     ];
 
     public function categoria() {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

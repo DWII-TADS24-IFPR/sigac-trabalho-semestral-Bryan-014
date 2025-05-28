@@ -14,9 +14,9 @@ class CategoriaController extends Controller
 
     protected $validationMessages = [
         'nome.required' => 'O campo nome é obigatório',
-        'nome.min:3' => 'O campo nome é deve ter pelo menos 3 caracteres',
+        'nome.min' => 'O campo nome é deve ter pelo menos 3 caracteres',
         'maximo_horas.required' => 'O campo máximo de horas é obigatório',
-        'maximo_horas.min:3' => 'O campo máximo de horas é deve ter pelo menos 3 caracteres',
+        'maximo_horas.min' => 'O campo máximo de horas é deve ter pelo menos 3 caracteres',
     ];
 
     public function index()

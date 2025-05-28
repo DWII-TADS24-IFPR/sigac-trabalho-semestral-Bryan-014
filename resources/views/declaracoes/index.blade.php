@@ -15,7 +15,7 @@
 @section('cont-box')
     <x-bread-crumb page="Declarações"/>        
     <div class="head-table">
-        <a href="{{ Route('declaracoes.create') }}" class="primary-btn mt-2">Cadastrar Declaração</a>  
+        <a href="{{ route('declaracoes.create') }}" class="primary-btn mt-2">Cadastrar Declaração</a>  
     </div>
     <div class="table-content mt-2">
         <div class="tbl-row">
@@ -29,9 +29,9 @@
                     <div class="tbl-cont">{{$declaracoes[$i]->hash}}</div>
                     <div class="tbl-cont">{{$declaracoes[$i]->data}}</div>
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ Route('declaracoes.show', ['id' => $declaracoes[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ Route('declaracoes.edit', ['id' => $declaracoes[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
-                        <form action="{{ Route('declaracoes.destroy', ['id' => $declaracoes[$i]->id]) }}" method="post">
+                        <a href="{{ route('declaracoes.show', ['id' => $declaracoes[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        <a href="{{ route('declaracoes.edit', ['id' => $declaracoes[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
+                        <form action="{{ route('declaracoes.destroy', ['id' => $declaracoes[$i]->id]) }}" method="post">
                             @csrf
                             <input class="tbl-btn-crud crud-delt" type="submit" value="">
                         </form>

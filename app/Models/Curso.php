@@ -18,14 +18,15 @@ class Curso extends Model
         'sigla',
         'total_horas',
         'nivel_id',
+        'eixo_id',
     ];
 
-    public function niveis() {
-        return $this->hasMany(Nivel::class);
+    public function nivel() {
+        return $this->belongsTo(Nivel::class);
     }
 
     public function eixo() {
-        return $this->hasMany(Eixo::class);
+        return $this->belongsTo(Eixo::class);
     }
 
     public function turmas() {

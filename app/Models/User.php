@@ -47,6 +47,14 @@ class User extends Authenticatable
         ];
     }
 
+    public function documento() {
+        return $this->hasMany(Documento::class);
+    }
+
+    public function aluno() {
+        return $this->hasOne(Aluno::class);
+    }
+
     public function role() {
         return $this->belongsTo(Role::class);
     }

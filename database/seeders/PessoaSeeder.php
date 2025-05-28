@@ -13,10 +13,10 @@ class PessoaSeeder extends Seeder
      */
     public function run(): void
     {
-        Pessoa::create([
-            "nome" => "Bryan Rosa da Silveira",
-            "idade" => 21,
-            "cpf" => "137.309.219-08",
-        ]);
+        // Pessoa::create([
+        //     "nome" => "Bryan Rosa da Silveira",
+        //     "idade" => 21,
+        //     "cpf" => "137.309.219-08",
+        // ]);
     }
 }

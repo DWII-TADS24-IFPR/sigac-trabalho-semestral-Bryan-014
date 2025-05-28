@@ -57,24 +57,24 @@ window.addEventListener('load', setFullHeight);
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function aplicarTemaSalvo() {
-    const temaSalvo = localStorage.getItem('tema');
+// function aplicarTemaSalvo() {
+//     const temaSalvo = localStorage.getItem('tema');
 
-    if (temaSalvo) {
-        if (temaSalvo == 'dark') {
-            switchDarkModeBtn.checked = true
-        }
-        document.documentElement.setAttribute('data-theme', temaSalvo);
-    } else {
-        document.documentElement.setAttribute('data-tema', 'light');
-    }
-}
+//     if (temaSalvo) {
+//         if (temaSalvo == 'dark') {
+//             switchDarkModeBtn.checked = true
+//         }
+//         document.documentElement.setAttribute('data-theme', temaSalvo);
+//     } else {
+//         document.documentElement.setAttribute('data-tema', 'light');
+//     }
+// }
 
-switchDarkModeBtn.addEventListener('change', () => {
-    const temaAtual = document.documentElement.getAttribute('data-theme');
-    const novoTema = temaAtual === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', novoTema); //switchDarkModeBtn.checked ? 'dark' : 'light'
-    localStorage.setItem('tema', novoTema);
-})
+// switchDarkModeBtn.addEventListener('change', () => {
+//     const temaAtual = document.documentElement.getAttribute('data-theme');
+//     const novoTema = temaAtual === 'dark' ? 'light' : 'dark';
+//     document.documentElement.setAttribute('data-theme', novoTema); //switchDarkModeBtn.checked ? 'dark' : 'light'
+//     localStorage.setItem('tema', novoTema);
+// })
 
-aplicarTemaSalvo()
+// aplicarTemaSalvo()

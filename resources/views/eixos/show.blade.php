@@ -13,21 +13,17 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Alunos" subPage="Visualizar" link="alunos.index"/>
+    <x-bread-crumb page="Eixos" subPage="Visualizar" link="eixos.index"/>
     <div class="mt-2 mb-3">
         <div class="wrapper-show">
-            <p><b>Nome: </b>{{$aluno->nome}}</p>
-            <p><b>Email: </b>{{$aluno->email}}</p>
-        </div>
-        <div class="wrapper-show">
-            <p><b>CPF: </b>{{$aluno->cpf}}</p>
+            <p><b>Nome: </b>{{$eixo->nome}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <form action="{{ route('alunos.destroy', ['id' => $aluno->id]) }}" method="post">
+            <form action="{{ route('niveis.destroy', ['id' => $eixo->id]) }}" method="post">
                 @csrf
                 <input class="primary-btn" type="submit" value="Excluir">
             </form>
-            <a class="primary-btn" href="{{ route('alunos.edit', ['id' => $aluno->id]) }}">Editar</a>
+            <a class="primary-btn" href="{{ route('niveis.edit', ['id' => $eixo->id]) }}">Editar</a>
         </div>
     </div>
 @endsection

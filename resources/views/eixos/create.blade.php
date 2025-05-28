@@ -13,8 +13,8 @@
 @endsection
 
 @section('cont-box')
-    <x-bread-crumb page="Níveis" subPage="Cadastrar" link="niveis.index"/>
-    <form action="{{ route('niveis.store') }}" method="post">
+    <x-bread-crumb page="Eixos" subPage="Cadastrar" link="eixos.index"/>
+    <form action="{{ route('eixos.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <div class="primary-input">
@@ -31,6 +31,15 @@
             <input class="primary-btn" type="submit" value="Cadastrar">
         </div>
     </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $erro)
+                    <li>{{ $erro }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection
 
 @section('js-resources')

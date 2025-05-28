@@ -14,7 +14,7 @@
 
 @section('cont-box')
     <x-bread-crumb page="Níveis" subPage="Editar" link="niveis.index"/>
-    <form action="{{ Route('niveis.update') }}" method="post">
+    <form action="{{ route('niveis.update') }}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$nivel->id}}">
         <div class="mb-3">

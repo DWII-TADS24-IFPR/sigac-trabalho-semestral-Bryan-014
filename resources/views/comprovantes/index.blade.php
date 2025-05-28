@@ -15,7 +15,7 @@
 @section('cont-box')
     <x-bread-crumb page="Comprovantes"/>
     <div class="head-table">
-        <a href="{{ Route('comprovantes.create') }}" class="primary-btn mt-2">Cadastrar Comprovante</a>  
+        <a href="{{ route('comprovantes.create') }}" class="primary-btn mt-2">Cadastrar Comprovante</a>  
     </div>
     <div class="table-content mt-2">
         <div class="tbl-row">
@@ -29,9 +29,9 @@
                     <div class="tbl-cont">{{$comprovantes[$i]->atividade}}</div>
                     <div class="tbl-cont center">{{$comprovantes[$i]->horas}}</div>
                     <div class="tbl-cont center cont-crud">
-                        <a href="{{ Route('comprovantes.show', ['id' => $comprovantes[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
-                        <a href="{{ Route('comprovantes.edit', ['id' => $comprovantes[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
-                        <form action="{{ Route('comprovantes.destroy', ['id' => $comprovantes[$i]->id]) }}" method="post">
+                        <a href="{{ route('comprovantes.show', ['id' => $comprovantes[$i]->id]) }}" class="tbl-btn-crud crud-view"></a>
+                        <a href="{{ route('comprovantes.edit', ['id' => $comprovantes[$i]->id]) }}" class="tbl-btn-crud crud-updt"></a>
+                        <form action="{{ route('comprovantes.destroy', ['id' => $comprovantes[$i]->id]) }}" method="post">
                             @csrf
                             <input class="tbl-btn-crud crud-delt" type="submit" value="">
                         </form>
