@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
+
 use App\Models\Declaracao;
+use App\Models\Documento;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
 class DeclaracaoController extends Controller
@@ -84,5 +88,21 @@ class DeclaracaoController extends Controller
         }
         
         return view('declaracoes.index')->with('danger', 'Declaração não encontrado');
+    }
+
+    public function generate(string $id)
+    {
+        $dompdf = new Dompdf();
+
+        $dados = Documento::find($id);
+
+        $html = View::make('declaracoes.generate', ['dados' => $dados]);
+
+        $dompdf->loadHtml($html);
+        
+        $dompdf->setPaper('A4');
+        
+        $dompdf->render();
+        $dompdf->stream();
     }
 }

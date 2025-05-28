@@ -8,11 +8,13 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComprovanteController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeclaracaoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\EixoController;
 use App\Http\Controllers\TurmaController;
+use App\Models\Declaracao;
 
 Route::get('/', function () {
     $user = Auth::user();
@@ -34,9 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'ValidAdmin'])->group(function () {
-    Route::get('/admin', function() {
-        return view('dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin', [DashboardController::class, 'admin'])->name('admin.dashboard');
 
     Route::get('/alunos', [AlunoController::class, 'index'])->name('alunos.index');
     Route::get('/alunos/create', [AlunoController::class, 'create'])->name('alunos.create');
@@ -110,16 +110,14 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
 });
 
 Route::middleware(['auth', 'ValidAluno'])->group(function () {
-    Route::get('/aluno', function() {
-        return view('dashboard');
-    })->name('aluno.dashboard');
+    Route::get('/aluno', [DashboardController::class, 'aluno'])->name('aluno.dashboard');
 
     Route::get('/solicitacao', [DocumentoController::class, 'create'])->name('solicitacao.create');
 
     Route::get('/documentos', [DocumentoController::class, 'list'])->name('documentos.list');
     Route::post('/documentos/store', [DocumentoController::class, 'store'])->name('documentos.store');
 
-    Route::get('/declaracao', [DocumentoController::class, 'generate'])->name('declaracao.generate');
+    Route::get('/declaracao/{id}', [DeclaracaoController::class, 'generate'])->name('declaracao.generate');
 
     // Route::get('/documentos/edit/{id}', [DocumentoController::class, 'edit'])->name('documentos.edit');
     // Route::post('/documentos/update', [DocumentoController::class, 'update'])->name('documentos.update');

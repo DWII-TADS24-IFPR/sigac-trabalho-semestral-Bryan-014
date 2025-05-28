@@ -130,7 +130,7 @@
 }
 
 .status-ball.pend {
-    background-color: var(--danger-color);
+    background-color: var(--pending-color);
 }
 
 .status-ball.danger {

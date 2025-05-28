@@ -134,6 +134,61 @@ input[type="submit"] {
     font-weight: 600;
 } 
 
+.cards-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.card {
+    width: 300px;
+    height: auto;
+    background-color: var(--primary-dark-color);
+    border-radius: 26px;
+    box-shadow: var(--shadow-1);
+    color: var(--text-color-2);
+    
+    & img {
+        border-radius: 26px;
+        width: 300px;        
+        height: 150px;        
+    }
+
+    & .card-info {
+        width: 65%;
+    }
+
+    & .card-cont {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+
+        & .title {
+            font-size: 26px;
+            font-weight: 500;
+        }
+        
+        & .value-info {            
+            font-size: 12px;
+            align-self: center;
+            padding: 6px;
+            border-radius: 25px;
+            color: var(--content-text-color);
+            background-color: var(--light-color);
+        }
+    }
+
+    & .card-foot {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & .card-link {
+        justify-self: flex-end;
+        width: 40%;
+    }
+}
 
 .steps {
     width: 100%;

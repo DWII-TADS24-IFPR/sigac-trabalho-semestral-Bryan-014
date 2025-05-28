@@ -16,7 +16,7 @@
     @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
         <x-bread-crumb page="Solicitações" subPage="Visualizar" link="solicitacoes.index"/>
     @else 
-        <x-bread-crumb page="Solicitações" subPage="Visualizar" link="solicitacao.create"/>
+        <x-bread-crumb page="Solicitações" subPage="Visualizar" link="documentos.list"/>
     @endif
     <div class="mt-2 mb-3">
         <div class="wrapper-show">
@@ -25,7 +25,17 @@
             <p><b>Aluno: </b>{{$documento->user->name}}</p>
         </div>
         <div class="wrapper-show">
-            <p><b>Status: </b>{{$documento->status == 0 ? 'Pendente' : 'Conferido' }}</p>
+            @php
+                $status = '';
+                if ($documento->status == 0) {
+                    $status = 'Pendente';
+                } elseif ($documento->status == 1) {
+                    $status = 'Aprovado';
+                } else {
+                    $status = 'Recusado';
+                }
+            @endphp
+            <p><b>Status: </b>{{$status}}</p>
             <p><b>Comentário: </b>{{$documento->comentario}}</p>
         </div>
         <div class="wrapper-show">
@@ -33,8 +43,18 @@
             <p><b>Hora Saída: </b>{{$documento->horas_out}}</p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <a href="" class="primary-btn">Aprovar</a>
-            <a href="" class="primary-btn">Recusar</a>
+            @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
+                <form action="{{ route('documentos.aprove', ['id' => $documento->id]) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$documento->id}}">
+                    <input class="primary-btn" type="submit" value="Aprovar">
+                </form>
+                <form action="{{ route('documentos.demiss', ['id' => $documento->id]) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$documento->id}}">
+                    <input class="primary-btn" type="submit" value="Recusar">
+                </form>  
+            @endif
         </div>
     </div>
 @endsection

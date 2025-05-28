@@ -111,36 +111,32 @@ class DocumentoController extends Controller
         return view('documentos.index')->with('danger', 'Documento não encontrado');
     }
 
-    public function aprove(Request $request)
+    public function aprove(string $id)
     {
-        $documento = Documento::find($request->id);
+        $documento = Documento::find($id);
         
         if (isset($documento)) {
-            $request->validate($this->validationRules, $this->validationMessages);
-
             $documento->status = 1;
 
             $documento->save();
 
-            return redirect()->route('documentos.index')->with('success', 'Documento atualizado com sucesso!');
+            return redirect()->route('solicitacoes.index')->with('success', 'Solicitação aprovada com sucesso!');
         }
-        return view('documentos.index')->with('danger', 'Documento não encontrado');
+        return view('solicitacoes.index')->with('danger', 'Documento não encontrado');
     }
 
-    public function demiss(Request $request)
+    public function demiss(string $id)
     {
-        $documento = Documento::find($request->id);
+        $documento = Documento::find($id);
         
         if (isset($documento)) {
-            $request->validate($this->validationRules, $this->validationMessages);
-
             $documento->status = 2;
 
             $documento->save();
 
-            return redirect()->route('documentos.index')->with('success', 'Documento atualizado com sucesso!');
+            return redirect()->route('solicitacoes.index')->with('success', 'Solicitação recusada com sucesso!');
         }
-        return view('documentos.index')->with('danger', 'Documento não encontrado');
+        return view('solicitacoes.index')->with('danger', 'Documento não encontrado');
     }
     
     public function destroy(string $id)
