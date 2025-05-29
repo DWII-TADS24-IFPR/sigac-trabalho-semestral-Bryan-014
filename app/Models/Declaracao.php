@@ -14,7 +14,6 @@ class Declaracao extends Model
     protected $fillable = [
         'hash',
         'data',
-        'aluno_id',
         'comprovante_id',
     ];
 

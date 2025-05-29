@@ -21,10 +21,11 @@
     <div class="mt-2 mb-3">
         <div class="wrapper-show">
             <p><b>Descrição: </b>{{$documento->descricao}}</p>
-            <p><b>Url: </b>{{$documento->url}}</p>
+            <p><b>Comentário: </b>{{$documento->comentario}}</p>
             <p><b>Aluno: </b>{{$documento->user->name}}</p>
         </div>
         <div class="wrapper-show">
+            <p><b>Hora Entrada: </b>{{$documento->horas_in}}</p>
             @php
                 $status = '';
                 if ($documento->status == 0) {
@@ -36,11 +37,10 @@
                 }
             @endphp
             <p><b>Status: </b>{{$status}}</p>
-            <p><b>Comentário: </b>{{$documento->comentario}}</p>
         </div>
         <div class="wrapper-show">
-            <p><b>Hora Entrada: </b>{{$documento->horas_in}}</p>
             <p><b>Hora Saída: </b>{{$documento->horas_out}}</p>
+            <p> <a href="{{$documento->url}}" target="_blank">Documento</a></p>
         </div>
         <div class="d-flex justify-content-end gap-2">
             @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
@@ -54,6 +54,10 @@
                     <input type="hidden" name="id" value="{{$documento->id}}">
                     <input class="primary-btn" type="submit" value="Recusar">
                 </form>  
+            @else
+                @if ($documento->status == 1)                 
+                    <a href="{{ route('declaracao.generate', ['id' => $documento->id]) }}" class="primary-btn">Gerar Declaração</a> 
+                @endif
             @endif
         </div>
     </div>

@@ -12,12 +12,8 @@
     @include('layouts.aside')   
 @endsection
 
-@section('cont-box')
-    @if (Auth::user()->role_id == env('ADMIN_ROLE_ID', 'role_id'))
-        <x-bread-crumb page="Solicitções" />
-    @else
-        <x-bread-crumb page="Minhas Solicitações" />
-    @endif
+@section('cont-box')    
+    <x-bread-crumb page="Solicitções" />
     <div class="table-content mt-2">
         <div class="tbl-row">
             <div class="tbl-head">Descrição</div>

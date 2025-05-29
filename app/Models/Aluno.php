@@ -27,19 +27,19 @@ class Aluno extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cursos() {
-        return $this->hasMany(Curso::class);
+    public function curso() {
+        return $this->belongsTo(Curso::class);
     }
 
-    public function turmas() {
-        return $this->hasMany(Turma::class);
+    public function turma() {
+        return $this->belongsTo(Turma::class);
     }
 
-    public function comprovante() {
-        return $this->belongsTo(Comprovante::class);
+    public function comprovantes() {
+        return $this->hasMany(Comprovante::class, 'aluno_id');
     }
 
-    public function declaracao() {
-        return $this->belongsTo(Declaracao::class);
+    public function declaracoes() {
+        return $this->hasMany(Declaracao::class);
     }
 }

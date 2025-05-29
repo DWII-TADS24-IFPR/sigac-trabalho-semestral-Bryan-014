@@ -15,16 +15,21 @@ class Comprovante extends Model
     protected $fillable = [
         'horas',
         'atividade',
+        'documento_id',
         'categoria_id',
         'aluno_id',
     ];
 
-    public function categorias() {
-        return $this->hasMany(Categoria::class);
+    public function documento() {
+        return $this->belongsTo(Documento::class);
     }
 
-    public function alunos() {
-        return $this->hasMany(Aluno::class);
+    public function categoria() {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function aluno() {
+        return $this->belongsTo(Aluno::class, 'aluno_id');
     }
 
     public function declaracao() {

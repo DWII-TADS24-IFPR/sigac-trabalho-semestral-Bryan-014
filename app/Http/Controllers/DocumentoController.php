@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+
 use App\Models\Categoria;
+use App\Models\Comprovante;
 use App\Models\Documento;
+use App\Models\Declaracao;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -116,9 +121,37 @@ class DocumentoController extends Controller
         $documento = Documento::find($id);
         
         if (isset($documento)) {
-            $documento->status = 1;
-
+            $documento->status = 1;            
             $documento->save();
+
+            $horario1 = Carbon::parse($documento->horas_in);
+            $horario2 = Carbon::parse($documento->horas_out);
+
+            $diferencaEmHoras = $horario1->floatDiffInHours($horario2);
+
+            $horas = $diferencaEmHoras;
+            $atividade = $documento->descricao;
+            $documento_id = $documento->id;
+            $categoria_id = $documento->categoria_id;
+            $aluno_id = $documento->user_id;
+
+            $comprovante = new Comprovante();
+            $comprovante->horas = $horas;
+            $comprovante->atividade = $atividade;
+            $comprovante->documento_id = $documento_id;
+            $comprovante->categoria_id = $categoria_id;
+            $comprovante->aluno_id = $aluno_id;
+
+            $comprovante->save();
+
+            var_dump($comprovante);
+
+            Declaracao::create([
+                'hash' => Str::uuid(),
+                'data' => Carbon::now(),
+                'comprovante_id' => $comprovante->id,
+            ]);
+
 
             return redirect()->route('solicitacoes.index')->with('success', 'Solicitação aprovada com sucesso!');
         }
@@ -130,7 +163,7 @@ class DocumentoController extends Controller
         $documento = Documento::find($id);
         
         if (isset($documento)) {
-            $documento->status = 2;
+            $documento->status = 2;           
 
             $documento->save();
 

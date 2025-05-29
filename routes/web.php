@@ -11,6 +11,7 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeclaracaoController;
 use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\HorasController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\EixoController;
 use App\Http\Controllers\TurmaController;
@@ -105,7 +106,7 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
     Route::get('/solicitacoes', [DocumentoController::class, 'index'])->name('solicitacoes.index');
     Route::post('/documentos/{id}/aprove', [DocumentoController::class, 'aprove'])->name('documentos.aprove');
     Route::post('/documentos/{id}/demiss', [DocumentoController::class, 'demiss'])->name('documentos.demiss');
-    Route::get('/horas', [DocumentoController::class, 'index'])->name('horas.index');
+    Route::get('/horas', [HorasController::class, 'index'])->name('horas.index');
     
 });
 

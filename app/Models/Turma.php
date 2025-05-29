@@ -20,7 +20,7 @@ class Turma extends Model
         return $this->belongsTo(Curso::class);
     }
     
-    public function aluno() {
-        return $this->belongsTo(Aluno::class);
+    public function alunos() {
+        return $this->hasMany(Aluno::class);
     }
 }

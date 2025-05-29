@@ -1,7 +1,7 @@
 :root {
-    --tom: 240;
+    --tom: 113;
     --primary-color: hsl(var(--tom), 10%, 10%, 100%);
-    --primary-dark-color: hsl(var(--tom), 35%, 10%);
+    --primary-dark-color: hsl(var(--tom), 35%, 20%);
     --light-color: hsl(var(--tom), 30%, 90%);
     --back-color: hsl(var(--tom), 100%, 100%, 100%);
     --shadow-1: rgba(0, 0, 0, 0.24) 0px 3px 8px;

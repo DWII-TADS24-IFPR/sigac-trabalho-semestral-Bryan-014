@@ -18,8 +18,12 @@ class Documento extends Model
         'comentario',
         'horas_out',
         'categoria_id',
-        'users_id',
+        'user_id',
     ];
+
+    public function comprovante() {
+        return $this->hasOne(Comprovante::class);
+    }
 
     public function categoria() {
         return $this->belongsTo(Categoria::class);
