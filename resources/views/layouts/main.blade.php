@@ -18,10 +18,7 @@
             @yield('header')
             <div class="app-container">
                 @yield('aside-links')
-                <div class="content">
-                    <div class="cont-box">
-                        @yield('cont-box')
-                    </div>
+                <div class="content">                    
                     @if (session('danger')) 
                         <x-alert :text="session('danger')"/>
                     @elseif (session('success')) 
@@ -34,6 +31,9 @@
                             </script>
                         @endforeach
                     @endif
+                    <div class="cont-box">
+                        @yield('cont-box')
+                    </div>
                 </div>
             </div>
         </div>

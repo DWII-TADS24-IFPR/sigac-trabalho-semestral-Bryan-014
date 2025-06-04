@@ -29,14 +29,14 @@ Route::get('/', function () {
     }
 })->middleware('auth');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['web' , 'auth'])->group(function () {
     Route::get('/documentos/show/{id}', [DocumentoController::class, 'show'])->name('documentos.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'ValidAdmin'])->group(function () {
+Route::middleware(['web', 'auth', 'ValidAdmin'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'admin'])->name('admin.dashboard');
 
     Route::get('/alunos', [AlunoController::class, 'index'])->name('alunos.index');
@@ -110,7 +110,7 @@ Route::middleware(['auth', 'ValidAdmin'])->group(function () {
     
 });
 
-Route::middleware(['auth', 'ValidAluno'])->group(function () {
+Route::middleware(['web', 'auth', 'ValidAluno'])->group(function () {
     Route::get('/aluno', [DashboardController::class, 'aluno'])->name('aluno.dashboard');
 
     Route::get('/solicitacao', [DocumentoController::class, 'create'])->name('solicitacao.create');

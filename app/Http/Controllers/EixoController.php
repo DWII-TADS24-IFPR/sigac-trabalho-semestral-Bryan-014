@@ -23,7 +23,6 @@ class EixoController extends Controller
 
     public function index()
     {
-
         View::share('errors', session()->get('errors', new MessageBag()));
         $eixos = Eixo::all();
         return view('eixos.index')->with('eixos', $eixos);
@@ -43,7 +42,7 @@ class EixoController extends Controller
             $eixo->nome = $request->nome;
 
             if ($eixo->save()) {
-                return redirect()->route('eixos.index')->with('success', 'Eixo cadastrado com sucesso!');
+                return redirect()->route('eixos.index')->with('success', 'Eixo cadastrado com sucesso!')->cookie('debug_session', json_encode(session()->all()), 1);
             } else {
                 return back()->with('danger', 'Erro ao salvar eixo.');
             }

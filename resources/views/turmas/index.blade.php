@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('css-resources')    
     @vite(['resources/css/reset.css', 'resources/css/components.css', 'resources/css/header.css', 'resources/css/table.css'])
@@ -13,6 +13,7 @@
 @endsection
 
 @section('cont-box')
+
     <x-bread-crumb page="Cursos" subPage="Turmas" link="cursos.index"/>
     <div class="mt-2 mb-3">
         <div class="steps">
